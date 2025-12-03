@@ -1,5 +1,6 @@
 # my ignore
 *.pdf
+/notebooks
 
 
 # Byte-compiled / optimized / DLL files
