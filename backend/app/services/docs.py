@@ -1,3 +1,5 @@
+from typing import List
+
 from sqlalchemy.orm import Session
 
 from app.schemas.docs import *
@@ -7,13 +9,20 @@ from app.repositories.obs import file_storage
 
 
 def register_document(db: Session, data: DocumentBase, user_id: int) -> DocumentInfo:
-    file_path = file_storage.save(f"docs/{data.title}", data.byte_data)
-    doc = docs.create_document(
+    file_path = file_storage.save(f"origin/{data.title}", data.byte_data)
+    document = docs.create_document(
         db, DocumentCreate(title=data.title, file_path=file_path, user_id=user_id)
     )
-    return DocumentInfo.model_validate(doc)
+    return DocumentInfo.model_validate(document)
 
 
 def get_document_by_id(db: Session, document_id: int) -> DocumentInfo:
-    doc = docs.get_document_by_id(db, document_id)
-    return DocumentInfo.model_validate(doc)
+    document = docs.get_document_by_id(db, document_id)
+    return DocumentInfo.model_validate(document)
+
+
+def get_documents_by_title(
+    db: Session, query: str, page: int, num_items: int
+) -> List[DocumentInfo]:
+    documents = docs.get_documents_by_title(db, query, page, num_items)
+    return [DocumentInfo.model_validate(doc) for doc in documents]

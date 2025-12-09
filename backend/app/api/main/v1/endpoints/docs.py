@@ -1,3 +1,5 @@
+from typing import List
+
 from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 
@@ -20,3 +22,10 @@ def register_document(
     user_id: int = Depends(get_current_user_id),
 ) -> DocumentInfo:
     return docs_service.register_document(db, data, user_id)
+
+
+@router.get("/", response_model=List[DocumentInfo], status_code=status.HTTP_200_OK)
+def get_documents(
+    query: str = "", page: int = 1, num_items: int = 20, db: Session = Depends(get_db)
+) -> List[DocumentInfo]:
+    return docs_service.get_documents_by_title(db, query, page, num_items)
