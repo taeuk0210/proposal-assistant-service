@@ -30,15 +30,3 @@ def login(
     db: Session = Depends(get_db),
 ) -> Token:
     return user_service.login_user(db, payload)
-
-
-@router.post(
-    "/login",
-    response_model=Token,
-    status_code=status.HTTP_200_OK,
-)
-def login(
-    payload: UserLogin,
-    db: Session = Depends(get_db),
-) -> Token:
-    return user_service.login_user(db, payload)
