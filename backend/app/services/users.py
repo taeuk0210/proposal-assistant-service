@@ -25,5 +25,5 @@ def login_user(db: Session, data: UserLogin) -> Token:
     if not user or not verify_password(data.password, user.password_hash):
         raise InvalidPasswordException()
 
-    access_token = create_access_token(subject=user)
+    access_token = create_access_token(subject=UserInfo.model_validate(user).model_dump())
     return Token(access_token=access_token)

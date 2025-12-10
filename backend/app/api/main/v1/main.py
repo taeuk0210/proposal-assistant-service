@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+
 from app.api.main.v1.endpoints import docs, users
 
 app = FastAPI()
