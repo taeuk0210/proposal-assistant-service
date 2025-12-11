@@ -18,6 +18,8 @@ class Settings(BaseSettings):
 
     FILE_STORAGE_BASE_DIR: str
     VLLM_BASE_URL: str
+    EMBED_BASE_URL: str
+    QDRANT_BASE_URL: str
 
     @property
     def DB_URL(self):
