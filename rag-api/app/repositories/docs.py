@@ -1,4 +1,4 @@
-from typing import Optional, List
+from typing import Optional
 
 from sqlalchemy.orm import Session
 
@@ -21,7 +21,7 @@ def create_document(db: Session, data: DocumentCreate) -> Document:
 
 def get_documents_by_title(
     db: Session, query: str, page: int, num_items: int
-) -> List[Document]:
+) -> list[Document]:
 
     return (
         db.query(Document)
