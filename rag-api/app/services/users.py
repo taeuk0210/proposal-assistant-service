@@ -7,7 +7,7 @@ from app.cores.security import (
 )
 from app.schemas.users import *
 from app.exceptions.users import *
-from app.repositories.rdb import users
+from app.repositories import users
 
 
 def signup_user(db: Session, data: UserCreate) -> UserInfo:

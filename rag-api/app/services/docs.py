@@ -1,11 +1,9 @@
-from typing import List
-
 from sqlalchemy.orm import Session
 
 from app.schemas.docs import *
 from app.exceptions.docs import *
-from app.repositories.rdb import docs
-from app.repositories.obs import file_storage
+from app.repositories import docs
+from app.stores import file_storage
 
 
 def register_document(db: Session, data: DocumentBase, user_id: int) -> DocumentInfo:
@@ -23,6 +21,6 @@ def get_document_by_id(db: Session, document_id: int) -> DocumentInfo:
 
 def get_documents_by_title(
     db: Session, query: str, page: int, num_items: int
-) -> List[DocumentInfo]:
+) -> list[DocumentInfo]:
     documents = docs.get_documents_by_title(db, query, page, num_items)
     return [DocumentInfo.model_validate(doc) for doc in documents]
