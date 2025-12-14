@@ -1,11 +1,10 @@
 import chatApi from "@/api/chatApi";
+import type { ChatRequest } from "@/types/chat";
 
 const chatService = {
-  sendMessage: async (text: string) => {
-    const response = await chatApi.sendMessage(text);
-    const reply = response.data.choices[0].message.content;
-
-    return reply;
+  sendMessage: async (request: ChatRequest) => {
+    const response = await chatApi.sendMessage(request);
+    return response.data.reply;
   },
 };
 

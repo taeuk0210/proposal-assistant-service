@@ -1,4 +1,3 @@
-export type ChatMessageType = {
-  roleType: "user" | "assistant";
-  text: string;
-};
+export type ChatRequest = {
+  message: string
+}
