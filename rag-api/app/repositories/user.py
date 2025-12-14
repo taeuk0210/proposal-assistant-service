@@ -7,12 +7,12 @@ from app.models.user import User
 
 
 def get_user_by_email(db: Session, email: str) -> Optional[User]:
-    return db.query(User).filter(User.user_email == email).first()
+    return db.query(User).filter(User.email == email).first()
 
 
 def create_user(db: Session, data: SignupRequest, password_hash: str) -> User:
     user = User(
-        user_email=data.user_email,
+        email=data.email,
         password_hash=password_hash,
     )
     db.add(user)
