@@ -1,9 +1,9 @@
 from sqlalchemy.orm import Session
 
-from app.schemas.chats import *
-from app.clients.openai import gpt2
+from app.schemas.chat import *
+from app.clients.qwen import qwen
 
 
 def send_message(request: ChatRequest, db: Session) -> ChatResponse:
-    response = gpt2.send_message(request.content)
-    return ChatResponse(content=response)
+    reply = qwen.send_message(request.message)
+    return ChatResponse(reply=reply)
