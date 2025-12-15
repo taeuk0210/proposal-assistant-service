@@ -1,8 +1,8 @@
-import type { ChatContent } from "@/types/chat";
 import { Box } from "@mui/material";
-import ChatMessage from "@/components/chat/ChatMessage";
 import { styled } from "@mui/material/styles";
-import ChatLoading from "./ChatLoading";
+import type { ChatContent } from "@/types/chat";
+import ChatMessage from "@/components/chat/ChatMessage";
+import ChatLoading from "@/components/chat/ChatLoading";
 
 type ChatMessageListProps = {
   data: ChatContent[];

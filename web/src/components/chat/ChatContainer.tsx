@@ -1,9 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { styled } from "@mui/material/styles";
 import { Box } from "@mui/material";
-
 import type { ChatContent } from "@/types/chat";
-
 import ChatMessageList from "@/components/chat/ChatMessageList";
 import SendMessage from "@/components/chat/SendMessage";
 import chatService from "@/services/chatService";

@@ -1,5 +1,5 @@
 import { styled, keyframes } from "@mui/system";
-import ChatMessage from "./ChatMessage";
+import ChatMessage from "@/components/chat/ChatMessage";
 
 const bounce = keyframes`
   0%, 80%, 100% { transform: scale(0); }

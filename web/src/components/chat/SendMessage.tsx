@@ -24,7 +24,11 @@ type SendMessageProps = {
   onSend: (text: string) => void;
 };
 
-const SendMessage: React.FC<SendMessageProps> = ({ message, setMessage, onSend }) => {
+const SendMessage: React.FC<SendMessageProps> = ({
+  message,
+  setMessage,
+  onSend,
+}) => {
   return (
     <StyledBox>
       <StyledTextField
