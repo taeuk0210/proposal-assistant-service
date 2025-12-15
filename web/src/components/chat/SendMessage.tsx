@@ -19,12 +19,12 @@ const StyledBox = styled(Box)(() => ({
 }));
 
 type SendMessageProps = {
-  text: string;
-  setText: (text: string) => void;
+  message: string;
+  setMessage: (text: string) => void;
   onSend: (text: string) => void;
 };
 
-const SendMessage: React.FC<SendMessageProps> = ({ text, setText, onSend }) => {
+const SendMessage: React.FC<SendMessageProps> = ({ message, setMessage, onSend }) => {
   return (
     <StyledBox>
       <StyledTextField
@@ -32,16 +32,16 @@ const SendMessage: React.FC<SendMessageProps> = ({ text, setText, onSend }) => {
         label=""
         multiline
         maxRows={4}
-        value={text}
+        value={message}
         onKeyDown={(e) => {
           if (e.key == "Enter" && !e.shiftKey) {
             e.preventDefault();
-            onSend(text);
+            onSend(message);
           }
         }}
-        onChange={(e) => setText(e.target.value)}
+        onChange={(e) => setMessage(e.target.value)}
       />
-      <StyledButton variant="contained" onClick={() => onSend(text)}>
+      <StyledButton variant="contained" onClick={() => onSend(message)}>
         전송
       </StyledButton>
     </StyledBox>

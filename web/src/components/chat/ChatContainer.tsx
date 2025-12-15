@@ -2,23 +2,23 @@ import { useEffect, useRef, useState } from "react";
 import { styled } from "@mui/material/styles";
 import { Box } from "@mui/material";
 
-import type { ChatMessageType } from "@/types/chat";
+import type { ChatContent } from "@/types/chat";
 
 import ChatMessageList from "@/components/chat/ChatMessageList";
 import SendMessage from "@/components/chat/SendMessage";
 import chatService from "@/services/chatService";
 
 const StyledBox = styled(Box)(() => ({
-  height: "90vh",
+  height: "100vh",
   width: "50vh",
   justifySelf: "center",
 }));
 
 const ChatContainer: React.FC = () => {
-  const [text, setText] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const [messages, setMessages] = useState<ChatMessageType[]>([
-    { roleType: "assistant", text: "안녕하세요 🙂 무엇을 도와드릴까요?" },
+  const [messages, setMessages] = useState<ChatContent[]>([
+    { roleType: "assistant", message: "안녕하세요 🙂 무엇을 도와드릴까요?" },
   ]);
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
@@ -32,17 +32,20 @@ const ChatContainer: React.FC = () => {
     });
   }, [messages]);
 
-  const handleSend = async (text: string) => {
-    const trimemedText = text.trim();
+  const handleSend = async (message: string) => {
+    const trimemedText = message.trim();
     if (!trimemedText) return;
 
-    setMessages((prev) => [...prev, { roleType: "user", text: trimemedText }]);
-    setText("");
+    setMessages((prev) => [
+      ...prev,
+      { roleType: "user", message: trimemedText },
+    ]);
+    setMessage("");
     setLoading(true);
 
-    const reply = await chatService.sendMessage({message: trimemedText});
+    const reply = await chatService.sendMessage({ message: trimemedText });
     setLoading(false);
-    setMessages((prev) => [...prev, { roleType: "assistant", text: reply }]);
+    setMessages((prev) => [...prev, { roleType: "assistant", message: reply }]);
   };
 
   return (
@@ -52,7 +55,11 @@ const ChatContainer: React.FC = () => {
         scrollRef={scrollRef}
         loading={loading}
       />
-      <SendMessage text={text} setText={setText} onSend={handleSend} />
+      <SendMessage
+        message={message}
+        setMessage={setMessage}
+        onSend={handleSend}
+      />
     </StyledBox>
   );
 };
