@@ -19,8 +19,8 @@ type PDFViewerProps = {
 const StyledPaper = styled(Paper)(() => ({
   display: "flex",
   flexDirection: "column",
-  height: "60vh",
-  width: "50vh",
+  width: "75vh",
+  height: "100vh",
   alignItems: "center",
 }));
 
@@ -38,25 +38,23 @@ const PDFViewer: React.FC<PDFViewerProps> = ({ file }) => {
   };
   return (
     <StyledPaper>
+      <Box>
+        <IconButton onClick={handlePagePrev}>
+          <ArrowBackIosNewOutlined />
+        </IconButton>
+        <IconButton onClick={handlePageNext}>
+          <ArrowForwardIosOutlined />
+        </IconButton>
+      </Box>
       {file && (
-        <>
-          <Box>
-            <IconButton onClick={handlePagePrev}>
-              <ArrowBackIosNewOutlined />
-            </IconButton>
-            <IconButton onClick={handlePageNext}>
-              <ArrowForwardIosOutlined />
-            </IconButton>
-          </Box>
-          <Document file={file} onLoadSuccess={handleLoadSuccess}>
-            <Page
-              pageNumber={pageNumber}
-              width={290}
-              renderTextLayer={false}
-              renderAnnotationLayer={false}
-            />
-          </Document>
-        </>
+        <Document file={file} onLoadSuccess={handleLoadSuccess}>
+          <Page
+            pageNumber={pageNumber}
+            width={500}
+            renderTextLayer={false}
+            renderAnnotationLayer={false}
+          />
+        </Document>
       )}
     </StyledPaper>
   );
