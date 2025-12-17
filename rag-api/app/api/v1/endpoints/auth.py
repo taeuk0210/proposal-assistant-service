@@ -19,7 +19,7 @@ def signup(
     request: SignupRequest,
     db: Session = Depends(get_db),
 ) -> SignupResponse:
-    return user_service.signup_user(db, request)
+    return user_service.signup_user(request, db)
 
 
 @router.post(
@@ -32,7 +32,7 @@ def login(
     response: Response,
     db: Session = Depends(get_db),
 ) -> LoginResponse:
-    access_token = user_service.login_user(db, request)
+    access_token = user_service.login_user(request, db)
     response.set_cookie(
         key="access_token",
         value=access_token,
