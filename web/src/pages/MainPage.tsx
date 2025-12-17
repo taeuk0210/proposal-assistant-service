@@ -7,19 +7,17 @@ const StyledBox = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "row",
   height: "100vh",
-  width: "100vh",
+  width: "200vh",
   justifySelf: "center",
   gap: theme.spacing(1),
 }));
 
 const MainPage: React.FC = () => {
   return (
-    <>
-      <StyledBox>
-        <ChatContainer />
-        <FileContainer />
-      </StyledBox>
-    </>
+    <StyledBox>
+      <ChatContainer />
+      <FileContainer />
+    </StyledBox>
   );
 };
 

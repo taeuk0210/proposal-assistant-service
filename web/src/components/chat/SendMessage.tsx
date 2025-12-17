@@ -13,15 +13,16 @@ const StyledButton = styled(Button)(({ theme }) => ({
   ...theme.typography.body1,
 }));
 
-const StyledBox = styled(Box)(() => ({
+const StyledBox = styled(Box)(({ theme }) => ({
+  margin: theme.spacing(1),
   display: "flex",
   alignItems: "center",
 }));
 
 type SendMessageProps = {
   message: string;
-  setMessage: (text: string) => void;
-  onSend: (text: string) => void;
+  setMessage: (message: string) => void;
+  onSend: (message: string) => void;
 };
 
 const SendMessage: React.FC<SendMessageProps> = ({

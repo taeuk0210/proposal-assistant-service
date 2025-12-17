@@ -11,7 +11,7 @@ type StyledPaperProps = {
 const StyledPaper = styled(Paper, {
   shouldForwardProp: (prop) => prop !== "isDragActive",
 })<StyledPaperProps>(({ theme, isDragActive }) => ({
-  height: "20vh",
+  height: "45vh",
   width: "50vh",
   paddingY: theme.spacing(2),
   justifySelf: "center",

@@ -1,14 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { styled } from "@mui/material/styles";
-import { Box } from "@mui/material";
+import { Paper } from "@mui/material";
 import type { ChatContent } from "@/types/chat";
 import ChatMessageList from "@/components/chat/ChatMessageList";
 import SendMessage from "@/components/chat/SendMessage";
 import chatService from "@/services/chatService";
 
-const StyledBox = styled(Box)(() => ({
+const StyledPaper = styled(Paper)(({ theme }) => ({
+  paddingX: theme.spacing(1),
   height: "100vh",
-  width: "50vh",
+  width: "60vh",
   justifySelf: "center",
 }));
 
@@ -31,23 +32,20 @@ const ChatContainer: React.FC = () => {
   }, [messages]);
 
   const handleSend = async (message: string) => {
-    const trimemedText = message.trim();
-    if (!trimemedText) return;
+    const newMessage = message.trim();
+    if (!newMessage) return;
 
-    setMessages((prev) => [
-      ...prev,
-      { roleType: "user", message: trimemedText },
-    ]);
+    setMessages((prev) => [...prev, { roleType: "user", message: newMessage }]);
     setMessage("");
     setLoading(true);
 
-    const reply = await chatService.sendMessage({ message: trimemedText });
+    const reply = await chatService.sendMessage({ message: newMessage });
     setLoading(false);
     setMessages((prev) => [...prev, { roleType: "assistant", message: reply }]);
   };
 
   return (
-    <StyledBox>
+    <StyledPaper>
       <ChatMessageList
         data={messages}
         scrollRef={scrollRef}
@@ -58,7 +56,7 @@ const ChatContainer: React.FC = () => {
         setMessage={setMessage}
         onSend={handleSend}
       />
-    </StyledBox>
+    </StyledPaper>
   );
 };
 
