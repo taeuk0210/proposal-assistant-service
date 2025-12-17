@@ -19,5 +19,4 @@ def load(key: str) -> bytes:
     if not os.path.exists(full_path):
         raise FileNotFoundError(f"File not found: {key}")
 
-    with open(full_path, "rb") as f:
-        return f.read()
+    return open(full_path, "rb")

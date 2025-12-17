@@ -19,3 +19,15 @@ def create_document(
     db.commit()
     db.refresh(doc)
     return doc
+
+
+def get_documents(
+        db: Session, user_id: int
+) -> list[Document]:
+    return db.query(Document).filter(Document.user_id == user_id).all()
+
+
+def get_document_by_id(
+        db: Session, user_id: int, document_id: int
+) -> Optional[Document]:
+    return db.query(Document).filter(Document.user_id == user_id).filter(Document.id == document_id).first()
