@@ -72,8 +72,13 @@ const LoginContainer: React.FC = () => {
   return (
     <StyledPaper>
       <StyledBox>
-        <TextInput label="아이디" value={email} setValue={setEmail} />
-        <TextInput label="비밀번호" value={password} setValue={setPassword} />
+        <TextInput label="이메일" value={email} setValue={setEmail} />
+        <TextInput
+          label="비밀번호"
+          value={password}
+          setValue={setPassword}
+          inputType="password"
+        />
         <Box>
           <StyledButton onClick={handleLogin}>로그인</StyledButton>
           <StyledButton onClick={handleSignup}>회원가입</StyledButton>
