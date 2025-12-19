@@ -24,7 +24,7 @@ async def register_document(
     user_id: int = Depends(get_current_user_id),
 ) -> DocRegResponse:
     request = DocRegRequest(title=title, file=await file.read())
-    return docs_service.register_document(request, db, user_id)
+    return await docs_service.register_document(request, db, user_id)
 
 
 @router.get(
@@ -35,7 +35,7 @@ async def register_document(
 def get_documents(
     db: Session = Depends(get_db),
     user_id: int = Depends(get_current_user_id),
-) -> DocRegResponse:    
+) -> DocRegResponse:
     return docs_service.get_documents(db, user_id)
 
 
@@ -48,5 +48,5 @@ def get_documents(
     document_id: int,
     db: Session = Depends(get_db),
     user_id: int = Depends(get_current_user_id),
-) -> FileResponse:    
+) -> FileResponse:
     return docs_service.get_document_file(document_id, db, user_id)

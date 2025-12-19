@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from app.cores import security
 from app.schemas.auth import *
 from app.exceptions.auth import *
-from app.repositories import user as user_repository
+from app.repositories import user_info as user_repository
 
 
 def signup_user(request: SignupRequest, db: Session) -> SignupResponse:

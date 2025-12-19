@@ -8,7 +8,7 @@ class Base(DeclarativeBase):
     pass
 
 
-class Document(Base):
+class DocumentInfo(Base):
     __tablename__ = "document_info"
 
     id: Mapped[int] = mapped_column(
@@ -47,6 +47,3 @@ class Document(Base):
         server_default=func.now(),
         nullable=False,
     )
-
-    def __repr__(self) -> str:
-        return f"Document(id={self.id}, title={self.title})"

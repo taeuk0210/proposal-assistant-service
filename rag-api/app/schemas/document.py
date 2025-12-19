@@ -19,11 +19,28 @@ class DocResponse(BaseModel):
     size: int
     created_at: datetime
 
-    model_config = {
-        "from_attributes": True
-    }
+    model_config = {"from_attributes": True}
 
 
 class DocListResponse(BaseModel):
     items: list[DocResponse]
     total: int
+
+
+class IngRegRequest(BaseModel):
+    document_id: int
+    embedding_model: str
+    embedding_dim: int
+
+
+class IngResponse(BaseModel):
+    id: int
+    user_id: int
+    document_id: int
+    embedding_model: str
+    embedding_dim: int
+    state: str
+    created_at: datetime
+    updated_at: datetime
+
+    model_config = {"from_attributes": True}

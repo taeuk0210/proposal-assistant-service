@@ -4,6 +4,7 @@ from qdrant_client import QdrantClient
 from qdrant_client.models import VectorParams, Distance
 
 from app.cores.config import settings
+from app.schemas.chunk import ChunkRegRequest
 
 client = QdrantClient(settings.QDRANT_BASE_URL)
 
@@ -25,14 +26,14 @@ def create_or_skip_collection(collection_name: str):
 create_or_skip_collection("documents")
 
 
-def upsert_documents(chunk_id: int, embedding: list[float], text: str) -> None:
+def upsert_documents(chunk_id: int, request: ChunkRegRequest) -> None:
     return client.upsert(
         collection_name="documents",
         points=[
             {
                 "id": chunk_id,
-                "vector": embedding,
-                "payload": {"text": text},
+                "vector": request.point.embedding,
+                "payload": {"content": request.point.content, "meta": request.meta},
             }
         ],
     )
